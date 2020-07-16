@@ -41,7 +41,6 @@ class UserController extends Controller
         $res = UserModel::insert($data);
 //        dd($res);
         if($res){
-            session(['res'=>$res]);
             return redirect('/user/login');
         }else{
             return redirect("/user/reg")->with("reg","注册失败！");

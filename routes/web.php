@@ -24,3 +24,9 @@ Route::prefix("/user")->group(function(){
     Route::get('login','User\LoginController@login');//登录试图
     Route::any('loginDo','User\LoginController@loginDo');//执行登录
 });
+Route::prefix('/admin')->middleware('isLogin')->group(function(){
+    Route::any('index','Admin\AdminController@index');
+    Route::any('aa','Admin\AdminController@aa');
+});
+
+

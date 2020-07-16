@@ -27,15 +27,19 @@ class LoginController extends Controller
         }
         $where = [
             ["user_name", "=", $data['user_name']],
-            ["user_password", "=", $data['user_password']]
         ];
         $res = UserModel::where($where)->first();
-        //dd($res);
+//        dd($res);
         if ($res) {
-            session(["id" => $res['id']]);
-            return redirect('/user/center');
+            $md=password_verify($data['user_password'],$res['user_password']);
+            if(!$md){
+                return redirect('user/login')->with("cuowu", "密码错误，请重新登陆");
+            }
+            session(['id'=>$res['id']]);
+//            dd($session);
+            return redirect('/admin/index');
         } else {
-            return redirect('user/login')->with("cuowu", "密码错误，请重新登陆");
+            return redirect('user/login')->with("cuowu", "没有查询到账号信息");
         }
     }
 }
