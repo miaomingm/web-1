@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/info', function () {
+    phpinfo();
+});
 
 Route::prefix("/user")->group(function(){
     //注册
@@ -27,6 +29,9 @@ Route::prefix("/user")->group(function(){
 Route::prefix('/admin')->middleware('isLogin')->group(function(){
     Route::any('index','Admin\AdminController@index');
     Route::any('aa','Admin\AdminController@aa');
+    Route::any('center','Admin\AdminController@center');
 });
+
+Route::get('/test1','TestController@test1');
 
 

@@ -14,4 +14,7 @@ class AdminController extends Controller
         $res=session('id');
         dd($res);
     }
+    public function center(){
+        return view('user.center');
+    }
 }
